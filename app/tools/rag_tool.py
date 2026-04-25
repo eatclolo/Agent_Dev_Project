@@ -1,4 +1,7 @@
-def search_knowledge(query: str) -> str:
+from app.services.rag_service import search_knowledge
+from langchain_community.tools import Tool
+
+def rag_tool(query: str) -> str:
     """
     Retrieve relevant information from a knowledge base.
 
@@ -12,4 +15,11 @@ def search_knowledge(query: str) -> str:
     Returns:
         str: Retrieved information (currently a placeholder response).
     """
-    return "RAG result placeholder"
+    return search_knowledge(query)
+
+
+calculator_tool_obj = Tool(
+    name="knowledge_searcher",
+    func=rag_tool,
+    description="Retrieve relevant information from a knowledge base."
+)

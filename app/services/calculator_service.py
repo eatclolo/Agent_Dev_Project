@@ -1,5 +1,13 @@
 def calculate(expr: str) -> str:
-    "Return the string of the expression of the calculation, return error if the error occurs"
+    """
+    Perform mathematical calculations.
+
+    Args:
+        expression (str): A mathematical expression, e.g., "2+2"
+
+    Returns:
+        str: The calculated result, or an error message if evaluation fails.
+    """
     try:
         return str(eval(expr))
     except Exception:
