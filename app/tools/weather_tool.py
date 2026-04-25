@@ -17,8 +17,18 @@ def weather_tool(query: str) -> str:
     return get_weather(query)
 
 
-calculator_tool_obj = Tool(
+weather_tool_obj = Tool(
     name="weather_searcher",
     func=weather_tool,
-    description="Return simple weather information for the given city."
+    description=
+    """
+    Useful for retrieving weather information for a specific city.
+
+    The input should contain a city name.
+
+    Examples:
+    - "Tokyo weather" → "Tokyo"
+    - "東京天氣" → "東京"
+    """
+
 )

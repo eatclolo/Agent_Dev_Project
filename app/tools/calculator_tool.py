@@ -17,5 +17,15 @@ def calculator_tool(query: str) -> str:
 calculator_tool_obj = Tool(
     name="Calculator",
     func=calculator_tool,
-    description="Perform mathematical calculations."
+    description=
+    """
+    Useful for solving mathematical expressions.
+
+    Extract and evaluate only the mathematical expression from the user's input.
+
+    Examples:
+    - "2+2" → "2+2"
+    - "what is 10 * 5" → "10*5"
+    - "我要計算1+1" → "1+1"
+    """
 )

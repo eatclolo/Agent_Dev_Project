@@ -18,8 +18,17 @@ def rag_tool(query: str) -> str:
     return search_knowledge(query)
 
 
-calculator_tool_obj = Tool(
+rag_tool_obj = Tool(
     name="knowledge_searcher",
     func=rag_tool,
-    description="Retrieve relevant information from a knowledge base."
+    description=
+    """
+    Useful for answering general knowledge questions or retrieving information from a knowledge base.
+
+    Use this tool when the question is not about calculation or weather.
+
+    Examples:
+    - "What is RAG?" 
+    - "Explain machine learning"
+    """
 )
