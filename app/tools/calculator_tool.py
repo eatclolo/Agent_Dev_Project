@@ -1,5 +1,7 @@
 from langchain_community.tools import Tool
+
 from app.services.calculator_service import calculate
+
 
 def calculator_tool(query: str) -> str:
     """

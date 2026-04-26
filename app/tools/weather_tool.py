@@ -1,5 +1,7 @@
-from app.services.weather_service import get_weather
 from langchain_community.tools import Tool
+
+from app.services.weather_service import get_weather
+
 
 def weather_tool(query: str) -> str:
     """

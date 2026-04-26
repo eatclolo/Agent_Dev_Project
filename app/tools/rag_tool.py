@@ -1,5 +1,7 @@
-from app.services.rag_service import search_knowledge
 from langchain_community.tools import Tool
+
+from app.services.rag_service import search_knowledge
+
 
 def rag_tool(query: str) -> str:
     """
