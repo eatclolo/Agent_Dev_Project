@@ -1,12 +1,17 @@
+from typing import Optional
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
-from app.agent.agent import run_agent
 from app.core.config import settings
+from app.agent.agent import run_agent
 from app.core.logger import get_logger, setup_logger
 from app.exceptions.custom_exceptions import agentError
-from app.exceptions.handlers import global_exception_handler, http_exception_handler, agent_exception_handler
-from app.schemas.ask import AskRequest
+from app.exceptions.handlers import (
+    agent_exception_handler,
+    global_exception_handler,
+    http_exception_handler,
+)
+from app.schemas.ask import AskRequest, AskResponse
 
 # -------------------------
 # Setup
@@ -22,20 +27,26 @@ app.add_exception_handler(exc_class_or_status_code = Exception, handler = global
 app.add_exception_handler(exc_class_or_status_code = HTTPException, handler = http_exception_handler)
 app.add_exception_handler(exc_class_or_status_code = agentError, handler = agent_exception_handler)
 
-
-# -------------------------
-# Request Model
-# -------------------------
-
-class QueryRequest(BaseModel):
-    query: str = Field(min_length = 1)
-
 # -------------------------
 # API
 # -------------------------
 
-@app.post("/ask")
-def ask(request: AskRequest):
+@app.post("/ask", response_model=AskResponse)
+def ask(request: AskRequest) -> AskResponse:
+    """
+    Handle user query via AI agent.
+
+    Args:
+        request (AskRequest): User input query.
+
+    Returns:
+        AskResponse: Structured response containing answer or error.
+    """
     logger.info(f"Received query: {request.query}")
     result = run_agent(request.query)
-    return {"answer": result}
+    logger.info(f"Agent result: {result}")
+    return AskResponse(
+        query=request.query,
+        answer=result,
+        error=None
+    )

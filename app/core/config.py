@@ -18,10 +18,17 @@ class Settings(BaseSettings):
     LOG_DIR: Path = BASE_DIR / "app/logs"
 
     #--------------------------
-    #API KEYz
+    #API KEY
     #--------------------------
 
     GEMINI_API_KEY: str
+
+    #--------------------------
+    #Parameter
+    #--------------------------
+
+    #Agent Verbose
+    VERBOSE: bool = False
 
     #LOG Parameter
     LOG_LEVEL: str = "INFO"
